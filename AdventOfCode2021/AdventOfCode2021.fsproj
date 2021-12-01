@@ -4,7 +4,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Library.fs" />
+    <Compile Include="Utils.fs" />
     <Compile Include="AotOne.fs" />
   </ItemGroup>
 </Project>
