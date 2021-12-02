@@ -37,3 +37,11 @@ let ``solution Aot2`` () =
 
     let solution = solutionAot2 inputs
     Assert.Equal(1962940, solution)
+
+[<Fact>]
+let ``solution Aot2 Part2`` () =
+    let inputs = read aotInputFile |> Seq.toList
+    let commandInputs:List<Command> = inputs |> List.map parseComand
+
+    let solution = solutionAot2Part2 inputs
+    Assert.Equal(1813664422, solution)
