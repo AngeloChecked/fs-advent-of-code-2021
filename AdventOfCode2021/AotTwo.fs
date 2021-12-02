@@ -8,7 +8,7 @@ module DayTwo =
                  | Down of int
                  | Forward of int 
 
-    let parseComand (line:string): Command = 
+    let parseCommand (line:string): Command = 
         let splitted = line.Split(' ') |> Array.toList
         match splitted with
         | ["up"; value] -> Up (int value)
@@ -26,7 +26,7 @@ module DayTwo =
     let solutionAot2 inputs =
         let lastSubmarineState = 
             inputs 
-            |> List.map parseComand
+            |> List.map parseCommand
             |> List.fold applyCommandToSubmarine baseSubmarine 
         let {Depth=depth; Horizontal=horizontal} = lastSubmarineState
         horizontal*depth
@@ -41,7 +41,7 @@ module DayTwo =
     let solutionAot2Part2 inputs =
         let lastSubmarineState = 
             inputs 
-            |> List.map parseComand
+            |> List.map parseCommand
             |> List.fold applyCommandToSubmarinePart2 baseSubmarine 
         let {Depth=depth; Horizontal=horizontal} = lastSubmarineState
         horizontal*depth
