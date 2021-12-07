@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <GenerateProgramFile>false</GenerateProgramFile>
   </PropertyGroup>
@@ -8,6 +8,7 @@
     <Compile Include="UtilsTest.fs" />
     <Compile Include="AotOneTest.fs" />
     <Compile Include="AotTwoTest.fs" />
+    <Compile Include="AotThreeTest.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>

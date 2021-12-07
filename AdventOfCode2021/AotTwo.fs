@@ -3,7 +3,7 @@ namespace AdventOfCode2021
 module DayTwo =
     type Submarine = { Depth: int; Horizontal: int; Aim: int } 
     let baseSubmarine = { Depth=0; Horizontal=0; Aim=0} 
-
+    
     type Command = Up of int 
                  | Down of int
                  | Forward of int 
