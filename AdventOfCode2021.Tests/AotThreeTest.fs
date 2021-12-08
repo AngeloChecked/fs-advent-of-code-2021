@@ -75,7 +75,37 @@ let ``AOT3 solution`` () =
     let inputs = read aotInputFile |> Seq.toList 
     let matrix = linesToMatrix inputs
     let binaryGammaRate = mostCommonPerMatrixColumn matrix 
+    
     let epsilonRate = binaryGammaRate |> invertRow |> fromBinaryToDecimal 
     let gammaRate = binaryGammaRate |> fromBinaryToDecimal 
 
     Assert.Equal(1071734, epsilonRate * gammaRate)
+
+[<Fact>]
+let ``oxygen criteria`` () =
+    let matrix = [
+                    [0;0;1;0;0]
+                    [1;1;1;1;0]
+                    [1;0;1;1;0]
+                    [1;0;1;1;1]
+                    [1;0;1;0;1]
+                    [0;1;1;1;1]
+                    [0;0;1;1;1]
+                    [1;1;1;0;0]
+                    [1;0;0;0;0]
+                    [1;1;0;0;1]
+                    [0;0;0;1;0]
+                    [0;1;0;1;0]
+                ]   
+    let oxygenRating = filterPerCriteria oxigenGeneratorCriteria matrix 
+    Assert.Equal<List<int>>([1;0;1;1;1], oxygenRating)
+
+[<Fact>]
+let ``AOT3 solution Part2`` () =
+    let inputs = read aotInputFile |> Seq.toList 
+    let matrix = linesToMatrix inputs
+    let oxygenRating = filterPerCriteria oxigenGeneratorCriteria matrix |> fromBinaryToDecimal
+    let co2Rating = filterPerCriteria co2ScrubberCriteria matrix |> fromBinaryToDecimal 
+    let lifeSupportRating = oxygenRating * co2Rating
+    
+    Assert.Equal(6124992, lifeSupportRating)
