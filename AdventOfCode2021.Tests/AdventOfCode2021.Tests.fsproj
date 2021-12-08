@@ -10,6 +10,7 @@
     <Compile Include="AotTwoTest.fs" />
     <Compile Include="AotThreeTest.fs" />
     <Compile Include="AotFourTest.fs" />
+    <Compile Include="AotFiveTest.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
   <ItemGroup>

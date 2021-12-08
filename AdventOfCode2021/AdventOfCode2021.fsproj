@@ -9,5 +9,6 @@
     <Compile Include="AotTwo.fs" />
     <Compile Include="AotThree.fs" />
     <Compile Include="AotFour.fs" />
+    <Compile Include="AotFive.fs" />
   </ItemGroup>
 </Project>
