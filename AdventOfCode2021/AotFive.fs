@@ -13,33 +13,12 @@ module DayFive =
                                    { From= (from.[0],from.[1]); To=(to_.[0],to_.[1]) }
                    )
 
-    let allStraightCoo({From=(x1,y1); To=(x2,y2)}): List<int * int> =
+    let allStraightCooFromArea({From=(x1,y1); To=(x2,y2)}): List<int * int> =
         let xStep = if x1 < x2 then 1 else -1
         let yStep = if y1 < y2 then 1 else -1
         [for x in x1..(xStep)..x2 -> (x, y1) ] @ [for y in y1+(yStep)..(yStep)..y2 -> (x1, y)]
 
-    let overlapAllStraightCoos(coos:List<Area>) =
-        let map: AreaMap = Map []
-        let rec foo map coo =
-            map |> Map.change coo (fun value ->
-               match value with
-               | Some value -> Some (value+1)
-               | None -> Some 1
-            )
-        
-        coos 
-        |> List.map allStraightCoo 
-        |> List.concat
-        |> List.fold foo map
-
-    let numberOfOverlappingStraightAreas areas = 
-        let straightCoo = areas |> List.filter(fun { From=(x1,y1); To=(x2,y2) } -> x1 = x2 || y1=y2 ) 
-        overlapAllStraightCoos straightCoo 
-        |> Map.filter(fun _ v -> v > 1)
-        |> Map.toList 
-        |> List.length
-
-    let allDiagonalCoo({From=(x1,y1); To=(x2,y2)}): List<int * int> =
+    let allCooFromArea({From=(x1,y1); To=(x2,y2)}): List<int * int> =
         let cartesianProduct x y =
            x |> List.collect (fun xs -> y |> List.map (fun ys -> xs, ys))
 
@@ -52,9 +31,9 @@ module DayFive =
         then y |> List.zip(x)
         else cartesianProduct x y 
 
-    let overlapAllDiagonalCoos(coos:List<Area>) =
+    let overlapAllArea(coos:List<Area>) areaToCoos =
         let map: AreaMap = Map []
-        let rec foo map coo =
+        let rec sumCooTogether map coo =
             map |> Map.change coo (fun value ->
                match value with
                | Some value -> Some (value+1)
@@ -62,12 +41,19 @@ module DayFive =
             )
         
         coos 
-        |> List.map allDiagonalCoo 
+        |> List.map areaToCoos 
         |> List.concat
-        |> List.fold foo map
+        |> List.fold sumCooTogether map
+
+    let numberOfOverlappingStraightAreas areas = 
+        let straightCoo = areas |> List.filter(fun { From=(x1,y1); To=(x2,y2) } -> x1 = x2 || y1=y2 ) 
+        overlapAllArea straightCoo allStraightCooFromArea
+        |> Map.filter(fun _ v -> v > 1)
+        |> Map.toList 
+        |> List.length
 
     let numberOfOverlappingAllAreas areas = 
-        overlapAllDiagonalCoos areas
+        overlapAllArea areas allCooFromArea
         |> Map.filter(fun _ v -> v > 1)
         |> Map.toList 
         |> List.length

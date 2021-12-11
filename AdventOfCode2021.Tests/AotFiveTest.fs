@@ -40,7 +40,7 @@ let ``parse boards`` () =
 let ``from Area to all straight coos`` () =
     let area = {From=(6,4); To=(2,0)}
 
-    let coos = allStraightCoo area
+    let coos = allStraightCooFromArea area
 
     let expect = [
         (6,4); (5,4); (4,4); (3,4); (2,4);
@@ -52,7 +52,7 @@ let ``from Area to all straight coos`` () =
 let ``from Area to all straight coos 2`` () =
     let area = {From=(1,1); To=(1,3)}
 
-    let coos = allStraightCoo area
+    let coos = allStraightCooFromArea area
 
     let expect = [ (1,1); (1,2); (1,3); ]
     Assert.Equal<List<int * int>>(expect, coos)
@@ -61,7 +61,7 @@ let ``from Area to all straight coos 2`` () =
 let ``from Area to all straight coos 3`` () =
     let area = {From=(9,7); To=(7,7)}
 
-    let coos = allStraightCoo area
+    let coos = allStraightCooFromArea area
 
     let expect = [ (9,7);(8,7);(7,7); ]
     Assert.Equal<List<int * int>>(expect, coos)
@@ -70,7 +70,7 @@ let ``from Area to all straight coos 3`` () =
 let ``from Area to all straight coos 4`` () =
     let area = {From=(0,9); To=(5,9)}
 
-    let coos = allStraightCoo area
+    let coos = allStraightCooFromArea area
 
     let expect = [ (0,9);(1,9);(2,9);(3,9);(4,9);(5,9); ]
     Assert.Equal<List<int * int>>(expect, coos)
@@ -79,7 +79,7 @@ let ``from Area to all straight coos 4`` () =
 let ``from Area to all diagonal coos`` () =
     let area = {From=(9,7); To=(7,9)}
 
-    let coos = allDiagonalCoo area
+    let coos = allCooFromArea area
 
     let expect = [ (9,7);(8,8);(7,9) ]
     Assert.Equal<List<int * int>>(expect, coos)
@@ -88,7 +88,7 @@ let ``from Area to all diagonal coos`` () =
 let ``from Area to all diagonal coos 2`` () =
     let area = {From=(1,1); To=(3,3)}
 
-    let coos = allDiagonalCoo area
+    let coos = allCooFromArea area
 
     let expect = [ (1,1);(2,2);(3,3) ]
     Assert.Equal<List<int * int>>(expect, coos)
@@ -97,7 +97,7 @@ let ``from Area to all diagonal coos 2`` () =
 let ``from Area to not diagonal coos`` () =
     let area = {From=(0,9); To=(5,9)}
 
-    let coos = allDiagonalCoo area
+    let coos = allCooFromArea area
 
     let expect = [ (0,9);(1,9);(2,9);(3,9);(4,9);(5,9); ]
     Assert.Equal<List<int * int>>(expect, coos)
